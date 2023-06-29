@@ -21,6 +21,8 @@ export default {
         <div className="AddressesManagement">
           <div className="address-form">
             <RegisteredAddress {...args} />
+            <RegisteredAddress {...args} />
+            <RegisteredAddress {...args} />
           </div>
         </div>
       </div>,
