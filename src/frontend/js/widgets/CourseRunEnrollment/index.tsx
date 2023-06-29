@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useReducer } from 'react';
 import { defineMessages, FormattedMessage } from 'react-intl';
-
+import c from 'classnames';
+import { Button } from '@openfun/cunningham-react';
 import { Spinner } from 'components/Spinner';
 import { useSession } from 'contexts/SessionContext';
 import { Priority } from 'types';
@@ -245,9 +246,9 @@ const CourseRunEnrollment: React.FC<CourseRunEnrollmentProps & CommonDataProps> 
       );
     case step === Step.ANONYMOUS:
       return (
-        <button onClick={login} className="course-run-enrollment__cta">
+        <Button onClick={login} fullWidth>
           <FormattedMessage {...messages.loginToEnroll} />
-        </button>
+        </Button>
       );
     case step === Step.LOADING:
       return (
@@ -264,11 +265,12 @@ const CourseRunEnrollment: React.FC<CourseRunEnrollmentProps & CommonDataProps> 
     case step === Step.UNENROLLMENT_FAILED:
       return (
         <React.Fragment>
-          <button
+          <Button
             onClick={() => setEnroll(true)}
-            className={`course-run-enrollment__cta ${
-              step === Step.ENROLLING ? 'course-run-enrollment__cta--loading' : ''
-            }`}
+            className={c({
+              'course-run-enrollment__cta--loading': step === Step.ENROLLING,
+            })}
+            fullWidth
             aria-busy={step === Step.ENROLLING}
           >
             <FormattedMessage {...messages.enroll} />
@@ -278,7 +280,7 @@ const CourseRunEnrollment: React.FC<CourseRunEnrollmentProps & CommonDataProps> 
                 <Spinner />
               </span>
             ) : null}
-          </button>
+          </Button>
           {step === Step.ENROLLMENT_FAILED ? (
             <div className="course-run-enrollment__errortext">
               {error?.localizedMessage ? (
@@ -312,6 +314,7 @@ const CourseRunEnrollment: React.FC<CourseRunEnrollmentProps & CommonDataProps> 
         </div>
       ) : (
         <div>
+          {/* FIXME: cunningham needs to implement a ButtonLink component */}
           <a href={courseRun.resource_link} className="course-run-enrollment__cta">
             <FormattedMessage {...messages.goToCourse} />
           </a>
