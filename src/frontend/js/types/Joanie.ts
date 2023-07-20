@@ -102,6 +102,7 @@ export interface Product {
   created_on: string;
   orders: Order['id'][];
   remaining_order_count?: number | null;
+  state: CourseState;
 }
 
 export interface CourseProduct extends Product {
@@ -109,9 +110,17 @@ export interface CourseProduct extends Product {
   target_courses: TargetCourse[];
 }
 
+export interface CourseProductRelationCourse {
+  id: string;
+  code: string;
+  title: string;
+  cover?: JoanieFile;
+}
+
 export interface CourseProductRelation {
   id: string;
-  course: CourseListItem;
+  course: CourseProductRelationCourse;
+  organizations: Organization[];
   product: Product;
   created_on: string;
 }

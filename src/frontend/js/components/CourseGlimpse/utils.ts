@@ -27,11 +27,26 @@ const getCourseGlimpsePropsFromCourseProductRelation = (
       })
     : getRoutePath(TeacherDashboardPaths.COURSE_PRODUCT, courseRouteParams);
   return {
-    ...getCourseGlimpsePropsFromJoanieCourse(courseProductRelation.course),
     id: courseProductRelation.id,
+    code: courseProductRelation.course.code,
     title: courseProductRelation.product.title,
+    cover_image: courseProductRelation.course.cover
+      ? {
+          src: courseProductRelation.course.cover.src,
+        }
+      : null,
+    // TODO (rlecellier): We should use owner_organization instead of these organization that are selling ones.
+    organization: {
+      title: courseProductRelation.organizations[0].title,
+      image: courseProductRelation.organizations[0].logo
+        ? {
+            src: courseProductRelation.organizations[0].logo.src,
+          }
+        : null,
+    },
     product_id: courseProductRelation.product.id,
     course_route: courseRoute,
+    state: courseProductRelation.product.state,
   };
 };
 
