@@ -38,6 +38,7 @@ through `context_processor`
 - Use css colors from cunningham instead of palette.scss
 - Improve the design of the dashboards layouts.
 - Improve the design of the dashboards sidebars.
+- Use cunningham Button component.
 
 ### Removed
 
